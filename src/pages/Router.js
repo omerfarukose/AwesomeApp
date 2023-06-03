@@ -17,7 +17,10 @@ export default function Router() {
 
     function HomeTabs() {
         return(
-            <Tab.Navigator>
+            <Tab.Navigator
+                screenOptions={{
+                    headerShown: false
+                }}>
                 <Tab.Screen name="Home" component={HomeScreen} />
                 <Tab.Screen name="Profile" component={ProfileScreen} />
             </Tab.Navigator>
@@ -26,7 +29,10 @@ export default function Router() {
 
     return(
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator
+                screenOptions={{
+                    headerShown: false
+                }}>
 
                 {
                     isLogin ?
