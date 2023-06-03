@@ -6,19 +6,21 @@ import {NavigationContainer} from "@react-navigation/native";
 import * as React from "react";
 import {useContext} from "react";
 import {LoginContext} from "../contexts/LoginContext";
+import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 
 export default function Router() {
 
     let { isLogin } = useContext(LoginContext)
 
     const Stack = createNativeStackNavigator();
+    const Tab = createBottomTabNavigator();
 
     function HomeTabs() {
         return(
-            <Stack.Navigator>
-                <Stack.Screen name="Home" component={HomeScreen} />
-                <Stack.Screen name="Profile" component={ProfileScreen} />
-            </Stack.Navigator>
+            <Tab.Navigator>
+                <Tab.Screen name="Home" component={HomeScreen} />
+                <Tab.Screen name="Profile" component={ProfileScreen} />
+            </Tab.Navigator>
         )
     }
 

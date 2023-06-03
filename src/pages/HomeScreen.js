@@ -22,28 +22,6 @@ export default function HomeScreen({ navigation }) {
 
             </Text>
 
-            <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate("Profile")
-                }}
-                style={{
-                    backgroundColor: "blue",
-                    padding: 20,
-                    borderRadius: 30
-                }}>
-
-                <Text
-                    style={{
-                        fontSize: 20,
-                        color: "white"
-                    }}>
-
-                    Go to Profile Screen !
-
-                </Text>
-
-            </TouchableOpacity>
-
         </SafeAreaView>
     )
 }
