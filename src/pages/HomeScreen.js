@@ -1,6 +1,6 @@
 import {SafeAreaView, Text, TouchableOpacity} from "react-native";
 
-export default function HomeScreen({ navigation }) {
+export default function HomeScreen() {
 
     return(
         <SafeAreaView
