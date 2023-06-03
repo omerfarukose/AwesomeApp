@@ -1,5 +1,5 @@
 import {SafeAreaView, Text, TouchableOpacity} from "react-native";
-import {useContext} from "react";
+import {useContext, useState} from "react";
 import {LoginContext} from "../contexts/LoginContext";
 
 export default function ProfileScreen() {
