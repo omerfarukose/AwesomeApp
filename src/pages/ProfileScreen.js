@@ -1,4 +1,4 @@
-import {SafeAreaView, Text, TouchableOpacity} from "react-native";
+import {Image, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
 import {useContext, useState} from "react";
 import {LoginContext} from "../contexts/LoginContext";
 
@@ -15,16 +15,36 @@ export default function ProfileScreen() {
                 justifyContent: "space-evenly"
             }}>
 
-            <Text
+            <View
                 style={{
-                    fontSize: 40,
-                    fontWeight: "bold",
-                    color: "blue"
+                    width: "100%",
+                    height: "40%",
+                    alignItems: "center",
+                    justifyContent: "space-evenly"
                 }}>
 
-                Profile Screen
+                <Image
+                    source={require("./../assets/images/user-img.png")}
+                    style={{
+                        width: 140,
+                        height: 140,
+                        borderWidth: 1,
+                        borderColor: "#0164FF",
+                        borderRadius: 100,
+                        marginHorizontal: 10,
+                    }}/>
 
-            </Text>
+                <Text
+                    style={{
+                        fontSize: 35,
+                        fontWeight: "bold",
+                    }}>
+
+                    Ömer Faruk KÖSE
+
+                </Text>
+
+            </View>
 
             <TouchableOpacity
                 onPress={() => {
@@ -32,8 +52,11 @@ export default function ProfileScreen() {
                 }}
                 style={{
                     backgroundColor: "red",
-                    padding: 20,
+                    width: "80%",
+                    paddingHorizontal: 20,
+                    paddingVertical: 10,
                     borderRadius: 20,
+                    alignItems: "center"
                 }}>
 
                 <Text

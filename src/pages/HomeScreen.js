@@ -6,16 +6,16 @@ export default function HomeScreen() {
         <SafeAreaView
             style={{
                 flex: 1,
-                backgroundColor: "#eceff1",
+                backgroundColor: "white",
             }}>
 
             <View
                 style={{
                     flexDirection: "row",
-                    backgroundColor: "#eceff1",
+                    backgroundColor: "white",
                     paddingVertical: 20,
                     borderBottomColor: "#cbcece",
-                    borderBottomWidth: 1,
+                    borderBottomWidth: 0.7,
                 }}>
 
                 <Image

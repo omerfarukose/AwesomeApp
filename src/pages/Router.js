@@ -15,12 +15,31 @@ export default function Router() {
     const Stack = createNativeStackNavigator();
     const Tab = createBottomTabNavigator();
 
+    let screenOptions = {
+        tabBarStyle:{
+            backgroundColor:'white',
+            height:50,
+        },
+        tabBarItemStyle:{
+            margin:5,
+            width: 30,
+            borderRadius:10,
+        },
+        tabBarLabelStyle: {
+            fontWeight: "700",
+            fontSize: 15
+        },
+        tabBarLabelPosition: "beside-icon",
+        tabBarIconStyle: { display: "none" },
+        tabBarInactiveTintColor: "#aeb8b9",
+        tabBarActiveTintColor: "#0164FF",
+        headerShown: false
+    }
+
     function HomeTabs() {
         return(
             <Tab.Navigator
-                screenOptions={{
-                    headerShown: false
-                }}>
+                screenOptions={screenOptions}>
                 <Tab.Screen name="Home" component={HomeScreen} />
                 <Tab.Screen name="Profile" component={ProfileScreen} />
             </Tab.Navigator>
