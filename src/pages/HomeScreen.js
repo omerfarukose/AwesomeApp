@@ -1,4 +1,4 @@
-import {SafeAreaView, Text, TouchableOpacity} from "react-native";
+import {Image, SafeAreaView, Text, View} from "react-native";
 
 export default function HomeScreen() {
 
@@ -6,21 +6,39 @@ export default function HomeScreen() {
         <SafeAreaView
             style={{
                 flex: 1,
-                backgroundColor: "orange",
-                alignItems: "center",
-                justifyContent: "space-evenly"
+                backgroundColor: "#eceff1",
             }}>
 
-            <Text
+            <View
                 style={{
-                    fontSize: 40,
-                    fontWeight: "bold",
-                    color: "white"
+                    flexDirection: "row",
+                    backgroundColor: "#eceff1",
+                    paddingVertical: 20,
+                    borderBottomColor: "#cbcece",
+                    borderBottomWidth: 1,
                 }}>
 
-                Home Screen
+                <Image
+                    source={require("./../assets/images/user-img.png")}
+                    style={{
+                        width: 70,
+                        height: 70,
+                        borderWidth: 1,
+                        borderColor: "#0164FF",
+                        borderRadius: 100,
+                        marginHorizontal: 10,
+                    }}/>
 
-            </Text>
+                <Text
+                    style={{
+                        flex: 1,
+                    }}>
+
+                    Sample Text ! Sample Text !Sample Text !Sample Text ! !Sample Text ! !Sample Text ! !Sample Text !
+
+                </Text>
+
+            </View>
 
         </SafeAreaView>
     )
