@@ -7,6 +7,7 @@ import * as React from "react";
 import {useContext} from "react";
 import {LoginContext} from "../contexts/LoginContext";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import CardDetailScreen from "./CardDetailScreen";
 
 export default function Router() {
 
@@ -36,11 +37,20 @@ export default function Router() {
         headerShown: false
     }
 
+    function HomeStack(){
+        return(
+            <Stack.Navigator>
+                <Stack.Screen name={"Home"} component={HomeScreen}/>
+                <Stack.Screen name={"CardDetail"} component={CardDetailScreen}/>
+            </Stack.Navigator>
+        )
+    }
+
     function HomeTabs() {
         return(
             <Tab.Navigator
                 screenOptions={screenOptions}>
-                <Tab.Screen name="Home" component={HomeScreen} />
+                <Tab.Screen name="Home" component={HomeStack} />
                 <Tab.Screen name="Profile" component={ProfileScreen} />
             </Tab.Navigator>
         )

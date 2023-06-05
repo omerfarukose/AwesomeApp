@@ -18,6 +18,34 @@ export default function LoginScreen() {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
+
+    const[hidePassword, setHidePassword] = useState(true)
+
+    function LoginRequest(){
+
+        let isCorrect = false
+
+        switch (username) {
+            case "mehmet":
+                // mehmetin şifresini kontrol et
+                if (password === "1234mehmet") {
+                    isCorrect = true
+                }
+                break;
+            case "fatma":
+                // fatmanın şifresini kontrol et
+                if (password === "1234fatma") {
+                    isCorrect = true
+                }
+                break;
+            default:
+                // kullanıcu bulunanamdı !!
+        }
+
+        setIsLogin(isCorrect)
+    }
+
+
     return(
         <SafeAreaView
             style={{
@@ -79,24 +107,48 @@ export default function LoginScreen() {
                                     paddingLeft: 20,
                                 }}/>
 
-                            {/* password input */}
-                            <TextInput
-                                value={password}
-                                onChangeText={setPassword}
-                                placeholder={"Password"}
+                            <View
                                 style={{
+                                    flexDirection: "row",
                                     borderWidth: 1,
                                     borderColor: "#bbbcbe",
-                                    width: "100%",
                                     borderRadius: 20,
-                                    paddingLeft: 20,
-                                }}/>
+                                    width: "100%",
+                                    alignItems: "center",
+                                    justifyContent: "space-between",
+                                    paddingHorizontal: 20,
+                                }}>
+
+                                {/* password input */}
+                                <TextInput
+                                    value={password}
+                                    onChangeText={setPassword}
+                                    placeholder={"Password"}
+                                    secureTextEntry={hidePassword}
+                                    style={{
+                                        paddingLeft: 20,
+                                    }}/>
+
+                                {/* hide password button */}
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        setIsLogin(true)
+                                    }}>
+
+                                    <Image
+                                        style={{
+                                            width: 40,
+                                            height: 40
+                                        }}
+                                        source={require("./../assets/images/home-img.png")}/>
+
+                                </TouchableOpacity>
+
+                            </View>
 
                             {/* login button */}
                             <TouchableOpacity
-                                onPress={() => {
-                                    setIsLogin(true)
-                                }}
+                                onPress={() => LoginRequest()}
                                 style={{
                                     width: "100%",
                                     height: 40,

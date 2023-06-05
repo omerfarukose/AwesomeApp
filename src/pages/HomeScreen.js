@@ -1,6 +1,25 @@
-import {Image, SafeAreaView, Text, View} from "react-native";
+import {FlatList, SafeAreaView} from "react-native";
+import CardItem from "../components/CardItem";
+import {useEffect, useState} from "react";
 
-export default function HomeScreen() {
+export default function HomeScreen( {navigation} ) {
+
+    const [tweetList, setTweetList] = useState([]);
+
+    useEffect(() => {
+
+        // get tweet list from server
+        let listData=  GetTweetList();
+
+        setTweetList(listData)
+
+    },[])
+
+    function GetTweetList(){
+        let tweetData = ["omer", "faruk", "kose","1","2","3","4","5","6","7","8","9","10","11"];
+
+        return tweetData;
+    }
 
     return(
         <SafeAreaView
@@ -9,36 +28,14 @@ export default function HomeScreen() {
                 backgroundColor: "white",
             }}>
 
-            <View
-                style={{
-                    flexDirection: "row",
-                    backgroundColor: "white",
-                    paddingVertical: 20,
-                    borderBottomColor: "#cbcece",
-                    borderBottomWidth: 0.7,
-                }}>
+            <CardItem navigation={navigation} textValue={"omer"}/>
 
-                <Image
-                    source={require("./../assets/images/user-img.png")}
-                    style={{
-                        width: 70,
-                        height: 70,
-                        borderWidth: 1,
-                        borderColor: "#0164FF",
-                        borderRadius: 100,
-                        marginHorizontal: 10,
-                    }}/>
-
-                <Text
-                    style={{
-                        flex: 1,
-                    }}>
-
-                    Sample Text ! Sample Text !Sample Text !Sample Text ! !Sample Text ! !Sample Text ! !Sample Text !
-
-                </Text>
-
-            </View>
+{/*
+            <FlatList
+                data={tweetList}
+                renderItem={ ( {item} ) => <CardItem navigation={navigation} textValue={item} />}
+            />
+*/}
 
         </SafeAreaView>
     )
