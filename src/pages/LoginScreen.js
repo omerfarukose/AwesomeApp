@@ -55,7 +55,6 @@ export default function LoginScreen() {
         setIsLogin(isCorrect)
     }
 
-
     return(
         <SafeAreaView
             style={{
@@ -144,10 +143,10 @@ export default function LoginScreen() {
 
                                     <Image
                                         style={{
-                                            width: 40,
-                                            height: 40
+                                            width: 30,
+                                            height: 30
                                         }}
-                                        source={require("./../assets/images/home-img.png")}/>
+                                        source={hidePassword ? require("./../assets/images/view.png") : require("./../assets/images/hide.png")}/>
 
                                 </TouchableOpacity>
 
