@@ -1,0 +1,113 @@
+import {Modal, Text, TouchableOpacity, View} from "react-native";
+import {useContext} from "react";
+import {LoginContext} from "../contexts/LoginContext";
+
+export default function LogoutModal( props ) {
+
+    let { visible, onClose } = props;
+
+    let { setIsLogin } = useContext(LoginContext)
+
+    return(
+        <Modal
+            transparent={true}
+            visible={visible}>
+
+            {/* transparent background */}
+            <View
+                style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: 'rgba(0,0,0,0.28)'
+                }}>
+
+                {/* modal box */}
+                <View
+                    style={{
+                        width: "80%",
+                        height: "30%",
+                        backgroundColor: "white",
+                        borderRadius: 10,
+                        justifyContent: "space-evenly",
+                        alignItems: "center"
+                    }}>
+
+                    {/*title*/}
+                    <Text
+                        style={{
+                            color: "blacl",
+                            fontWeight: "bold",
+                            fontSize: 30
+                        }}>
+                        Uyarı !
+                    </Text>
+
+                    {/*description*/}
+                    <Text>
+                        Çıkış yapmak istediğinize emin misiniz ?
+                    </Text>
+
+                    {/*button group*/}
+                    <View
+                        style={{
+                            flexDirection: "row",
+                            justifyContent: "space-evenly",
+                            width: "100%"
+                        }}>
+
+                        {/*cancel */}
+                        <TouchableOpacity
+                            onPress={() => onClose()}
+                            style={{
+                                width: "25%",
+                                backgroundColor: "orange",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                paddingVertical: 10,
+                                borderRadius: 10,
+                            }}>
+
+                            <Text
+                                style={{
+                                    color: "white",
+                                    fontWeight: "bold"
+                                }}>
+                                İptal
+                            </Text>
+
+                        </TouchableOpacity>
+
+                        {/*logout*/}
+                        <TouchableOpacity
+                            onPress={() => {
+                                setIsLogin(false)
+                            }}
+                            style={{
+                                width: "25%",
+                                backgroundColor: "red",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                paddingVertical: 10,
+                                borderRadius: 10,
+                            }}>
+
+                            <Text
+                                style={{
+                                    color: "white",
+                                    fontWeight: "bold"
+                                }}>
+                                Çıkış
+                            </Text>
+
+                        </TouchableOpacity>
+
+                    </View>
+
+                </View>
+
+            </View>
+
+        </Modal>
+    )
+}

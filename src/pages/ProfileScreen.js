@@ -1,10 +1,10 @@
 import {Image, SafeAreaView, Text, TouchableOpacity, View} from "react-native";
-import {useContext, useState} from "react";
-import {LoginContext} from "../contexts/LoginContext";
+import {useState} from "react";
+import LogoutModal from "../components/LogoutModal";
 
 export default function ProfileScreen() {
 
-    let { setIsLogin } = useContext(LoginContext)
+    const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false)
 
     return(
         <SafeAreaView
@@ -48,7 +48,7 @@ export default function ProfileScreen() {
 
             <TouchableOpacity
                 onPress={() => {
-                    setIsLogin(false)
+                    setIsLogoutModalVisible(true)
                 }}
                 style={{
                     backgroundColor: "red",
@@ -71,6 +71,12 @@ export default function ProfileScreen() {
                 </Text>
 
             </TouchableOpacity>
+
+            <LogoutModal
+                visible={isLogoutModalVisible}
+                onClose={() => {
+                    setIsLogoutModalVisible(false)
+                }}/>
 
         </SafeAreaView>
     )
