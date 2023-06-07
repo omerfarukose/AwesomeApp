@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import {useContext, useState} from "react";
 import {LoginContext} from "../contexts/LoginContext";
+import Toast from 'react-native-toast-message';
 
 export default function LoginScreen() {
 
@@ -17,9 +18,14 @@ export default function LoginScreen() {
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [hidePassword, setHidePassword] = useState(true)
 
-
-    const[hidePassword, setHidePassword] = useState(true)
+    const showToast = (text) => {
+        Toast.show({
+            type: 'error',
+            text2: text
+        });
+    }
 
     function LoginRequest(){
 
@@ -30,16 +36,20 @@ export default function LoginScreen() {
                 // mehmetin şifresini kontrol et
                 if (password === "1234mehmet") {
                     isCorrect = true
+                } else {
+                    showToast("Hatalı parola !")
                 }
                 break;
             case "fatma":
                 // fatmanın şifresini kontrol et
                 if (password === "1234fatma") {
                     isCorrect = true
+                } else {
+                    showToast("Hatalı parola !")
                 }
                 break;
             default:
-                // kullanıcu bulunanamdı !!
+                showToast("Kullanıcı Bulunamadı !")
         }
 
         setIsLogin(isCorrect)
@@ -124,15 +134,12 @@ export default function LoginScreen() {
                                     value={password}
                                     onChangeText={setPassword}
                                     placeholder={"Password"}
-                                    secureTextEntry={hidePassword}
-                                    style={{
-                                        paddingLeft: 20,
-                                    }}/>
+                                    secureTextEntry={hidePassword}/>
 
                                 {/* hide password button */}
                                 <TouchableOpacity
                                     onPress={() => {
-                                        setIsLogin(true)
+                                        setHidePassword(!hidePassword)
                                     }}>
 
                                     <Image
@@ -148,7 +155,9 @@ export default function LoginScreen() {
 
                             {/* login button */}
                             <TouchableOpacity
-                                onPress={() => LoginRequest()}
+                                onPress={() => {
+                                    LoginRequest()
+                                }}
                                 style={{
                                     width: "100%",
                                     height: 40,
