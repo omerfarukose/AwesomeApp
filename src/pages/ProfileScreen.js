@@ -46,6 +46,7 @@ export default function ProfileScreen() {
 
             </View>
 
+            {/*logout button*/}
             <TouchableOpacity
                 onPress={() => {
                     setIsLogoutModalVisible(true)
@@ -74,7 +75,7 @@ export default function ProfileScreen() {
 
             <LogoutModal
                 visible={isLogoutModalVisible}
-                onClose={() => {
+                onCancelPress={() => {
                     setIsLogoutModalVisible(false)
                 }}/>
 

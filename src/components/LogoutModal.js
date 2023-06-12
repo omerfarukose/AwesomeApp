@@ -4,7 +4,7 @@ import {LoginContext} from "../contexts/LoginContext";
 
 export default function LogoutModal( props ) {
 
-    let { visible, onClose } = props;
+    let { visible, onCancelPress } = props;
 
     let { setIsLogin } = useContext(LoginContext)
 
@@ -58,7 +58,7 @@ export default function LogoutModal( props ) {
 
                         {/*cancel */}
                         <TouchableOpacity
-                            onPress={() => onClose()}
+                            onPress={() => onCancelPress()}
                             style={{
                                 width: "25%",
                                 backgroundColor: "orange",
