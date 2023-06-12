@@ -1,9 +1,27 @@
 import {Image, Modal, SafeAreaView, ScrollView, Text, TouchableOpacity, View} from "react-native";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import * as Progress from 'react-native-progress';
+
 
 export default function HomeScreen( {navigation} ) {
 
     let storyData = [
+        {
+            uri: "https://avatars.githubusercontent.com/u/57189131?v=4",
+            isClicked: false,
+        },
+        {
+            uri: "https://media.cnn.com/api/v1/images/stellar/prod/221203202608-elon-musk-file-120322.jpg?c=1x1",
+            isClicked: false,
+        },
+        {
+            uri: "https://b.fssta.com/uploads/application/soccer/headshots/885.vresize.350.350.medium.14.png",
+            isClicked: false,
+        },
+        {
+            uri: "https://img.a.transfermarkt.technology/portrait/big/28003-1671435885.jpg?lm=1",
+            isClicked: false,
+        },
         {
             uri: "https://avatars.githubusercontent.com/u/57189131?v=4",
             isClicked: false,
@@ -25,21 +43,30 @@ export default function HomeScreen( {navigation} ) {
     const [isStoryModalVisible, setIsStoryModalVisible] = useState(false)
     const [selectedImage, setSelectedImage] = useState(require("./../assets/images/user-img.png"))
     const [storyDataList, setStoryDataList] = useState(storyData)
+    const [selectedIndex, setSelectedIndex] = useState(0)
+
+    useEffect(() => {
+        if (isStoryModalVisible) {
+            setTimeout(() => {
+                setIsStoryModalVisible(false)
+            },3000)
+        }
+    },[isStoryModalVisible])
 
     function _renderStoryItem(data, index){
-
         let isClicked = data.isClicked
         let imgUri = data.uri
 
         return(
             <TouchableOpacity
                 onPress={() => {
-                    setIsStoryModalVisible(true)
-                    setSelectedImage(imgUri)
-
                     let newArr = storyDataList
                     newArr[index].isClicked = true
                     setStoryDataList(newArr)
+
+                    setIsStoryModalVisible(true)
+                    setSelectedImage(imgUri)
+                    setSelectedIndex(index)
                 }}>
 
                 <Image
@@ -69,8 +96,8 @@ export default function HomeScreen( {navigation} ) {
                 style={{
                     paddingTop: 10
                 }}
+                overScrollMode={"never"}
                 showsHorizontalScrollIndicator={false}
-                overScrollMode="never"
                 horizontal>
 
                 {
@@ -97,7 +124,7 @@ export default function HomeScreen( {navigation} ) {
                         onPress={() => setIsStoryModalVisible(false)}
                         style={{
                             alignSelf: "flex-end",
-                            margin: 20
+                            margin: 30
                         }}>
 
                         <Text
@@ -110,14 +137,30 @@ export default function HomeScreen( {navigation} ) {
 
                     </TouchableOpacity>
 
-                    {/*story image*/}
-                    <Image
+                    <TouchableOpacity
                         style={{
                             width: "100%",
                             resizeMode: "contain",
                             flex: 1,
                         }}
-                        source={{uri: selectedImage}}/>
+                        onPress={() => {
+                            if (selectedIndex === storyDataList.length -1) {
+                                setIsStoryModalVisible(false)
+
+                            } else {
+                                setSelectedIndex(selectedIndex + 1)
+                            }
+                        }}>
+                        {/*story image*/}
+                        <Image
+                            style={{
+                                width: "100%",
+                                resizeMode: "contain",
+                                flex: 1,
+                            }}
+                            source={{uri: storyDataList[selectedIndex].uri}}/>
+
+                    </TouchableOpacity>
 
                 </View>
 
