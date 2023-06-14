@@ -59,6 +59,9 @@ export default function HomeScreen( {navigation} ) {
 
         return(
             <TouchableOpacity
+                style={{
+                    height: 80,
+                }}
                 onPress={() => {
                     let newArr = storyDataList
                     newArr[index].isClicked = true
