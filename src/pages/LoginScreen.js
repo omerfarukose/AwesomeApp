@@ -11,6 +11,7 @@ import {
 import {useContext, useState} from "react";
 import {LoginContext} from "../contexts/LoginContext";
 import Toast from 'react-native-toast-message';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen() {
 
@@ -27,11 +28,20 @@ export default function LoginScreen() {
         });
     }
 
+    const storeData = async (value) => {
+        try {
+            await AsyncStorage.setItem('isLogin', value);
+        } catch (e) {
+            // saving error
+        }
+    };
+
     function LoginRequest(){
 
         let isCorrect = false
 
         switch (username) {
+            case "Mehmet":
             case "mehmet":
                 // mehmetin şifresini kontrol et
                 if (password === "1234mehmet") {
@@ -52,6 +62,7 @@ export default function LoginScreen() {
                 showToast("Kullanıcı Bulunamadı !")
         }
 
+        storeData("1");
         setIsLogin(isCorrect)
     }
 

@@ -1,12 +1,21 @@
 import {Modal, Text, TouchableOpacity, View} from "react-native";
 import {useContext} from "react";
 import {LoginContext} from "../contexts/LoginContext";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LogoutModal( props ) {
 
     let { visible, onCancelPress } = props;
 
     let { setIsLogin } = useContext(LoginContext)
+
+    const removeData = async () => {
+        try {
+            await AsyncStorage.removeItem('isLogin');
+        } catch (e) {
+            // saving error
+        }
+    };
 
     return(
         <Modal
@@ -81,7 +90,11 @@ export default function LogoutModal( props ) {
                         {/*logout*/}
                         <TouchableOpacity
                             onPress={() => {
-                                setIsLogin(false)
+                                removeData();
+                                onCancelPress();
+                                setTimeout(() => {
+                                    setIsLogin(false)
+                                },100)
                             }}
                             style={{
                                 width: "25%",
