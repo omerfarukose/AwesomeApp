@@ -156,7 +156,7 @@ export default function HomeScreen({navigation}) {
                 }}>
 
             <TouchableOpacity
-                style={{backgroundColor: "red"}}
+                style={{}}
                 onPress={() => {
                     navigation.navigate("UserList")
                     // getUsers();
@@ -166,6 +166,18 @@ export default function HomeScreen({navigation}) {
                 </Text>
 
             </TouchableOpacity>
+
+                <TouchableOpacity
+                    style={{}}
+                    onPress={() => {
+                        navigation.navigate("PostList")
+                        // getUsers();
+                    }}>
+                    <Text>
+                        Get Posts
+                    </Text>
+
+                </TouchableOpacity>
 
             </ScrollView>
 

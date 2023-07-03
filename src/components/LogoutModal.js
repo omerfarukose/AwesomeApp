@@ -3,7 +3,8 @@ import {useContext} from "react";
 import {LoginContext} from "../contexts/LoginContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function LogoutModal( props ) {
+
+export default function LogoutModal( props) {
 
     let { visible, onCancelPress } = props;
 

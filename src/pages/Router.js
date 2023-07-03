@@ -11,6 +11,8 @@ import CardDetailScreen from "./CardDetailScreen";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserListSceen from "./User/UserListSceen";
 import UserDetailSceen from "./User/UserDetailSceen";
+import PostListScreen from "./Post/PostListScreen";
+import PostDetailScreen from "./Post/PostDetailScreen";
 
 export default function Router() {
 
@@ -66,6 +68,14 @@ export default function Router() {
                 }}/>
                 <Stack.Screen name="UserDetail" component={UserDetailSceen} options={{
                     title: "User Detail"
+                }}/>
+
+                <Stack.Screen name="PostList" component={PostListScreen} options={{
+                    title: "Post List"
+                }}/>
+
+                <Stack.Screen name="PostDetail" component={PostDetailScreen} options={{
+                    title: "Post Detail"
                 }}/>
 
             </Stack.Navigator>
