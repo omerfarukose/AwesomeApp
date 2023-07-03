@@ -8,11 +8,12 @@ function PostDetailScreen(props) {
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState(null)//user bilgilerini tutan state
     const [post, setPost] = useState(null)//post bilgilerini tutan state
+    const [comments, setComments] = useState([])//comments bilgilerini tutan state
 
     useEffect(() => {
         getPost();//Sayfa ilk çalıştığında çağırılacak fonksiyon
+        getComments(postId)
     }, [])
-
 
     function getPost() {
         if (postData) {
@@ -44,6 +45,19 @@ function PostDetailScreen(props) {
 
     }
 
+    function getComments(postId) {
+
+        setIsLoading(true);
+        axios.get('https://jsonplaceholder.typicode.com/posts/' + postId + '/comments')
+            .then((response) => {
+                setComments(response.data);
+            }).finally(() => {
+            setIsLoading(false);
+        });
+
+
+    }
+
     function _renderSingleField(label, value) {
         return (
             <View style={{
@@ -51,7 +65,8 @@ function PostDetailScreen(props) {
                 flex: 1,
                 flexDirection: "row"
             }}>
-                <Text style={userListStyle.text}>{label}: {value}</Text>
+                <Text style={{fontSize:15,fontWeight:"bold",...userListStyle.text}}>{label}:</Text>
+                <Text style={userListStyle.text}> {value}</Text>
 
             </View>
         );
@@ -78,7 +93,27 @@ function PostDetailScreen(props) {
             <Fragment>
 
 
-                {_renderSingleField("Name", user.name)}
+                <TouchableOpacity onPress={() => {
+                    navigation.navigate("UserDetail", {userId: user.id})
+                }}>
+                    {_renderSingleField("Name", user.name)}
+                </TouchableOpacity>
+
+
+            </Fragment>
+        );
+    }
+
+    function _renderCommentItem(comment) {
+
+        return (
+            <Fragment>
+
+                <View style={{borderWidth: 1,margin:5}}>
+                    {_renderSingleField("Name", comment.name)}
+                    {_renderSingleField("Body", comment.body)}
+                </View>
+
 
 
             </Fragment>
@@ -104,6 +139,23 @@ function PostDetailScreen(props) {
                 {
                     user &&
                     _renderUserItem(user)
+                }
+
+                <Text style={{
+                    padding: 5,
+                    fontSize: 20,
+                    fontWeight: "bold"
+                }}>
+                    All Comments
+                </Text>
+
+                {
+                    comments.length > 0 &&
+
+                    comments.map((comment, index) => {
+                        return _renderCommentItem(comment)
+                    })
+
                 }
 
 

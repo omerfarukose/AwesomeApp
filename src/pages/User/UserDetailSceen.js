@@ -8,9 +8,11 @@ function UserDetailScreen(props) {
 
     const [isLoading, setIsLoading] = useState(false)
     const [user, setUser] = useState(null)
+    const [list, setList] = useState([])
 
     useEffect(() => {
         getUser();
+        getList();
     }, [])
 
 
@@ -27,6 +29,23 @@ function UserDetailScreen(props) {
             });
         }
 
+    }
+
+    function getList() {
+
+        setIsLoading(true);
+        axios.get('https://jsonplaceholder.typicode.com/users/'+userId + '/posts')
+            .then((response) => {
+                console.log("response", response)
+
+                setList(response.data);
+
+            }).finally(() => {
+
+            setIsLoading(false);
+
+
+        });
     }
 
     function _renderSingleField(label, value) {
@@ -65,6 +84,27 @@ function UserDetailScreen(props) {
         );
     }
 
+    function _renderListItem(data, index) {
+
+        const id = data.id;
+        return (
+            <View style={{
+                // justifyContent:"center",
+                flex: 1,
+                flexDirection: "row"
+            }}>
+                <Text style={{padding: 10}}>id: {id}</Text>
+                <TouchableOpacity
+                    onPress={() => {
+                        navigation.navigate("PostDetail", {postId: id, postData:null})
+                    }}
+                    style={{justifyContent: "flex-end"}}>
+                    <Text style={{padding: 10}}>Title: {data.title}</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
     return (
 
         <ScrollView
@@ -81,6 +121,23 @@ function UserDetailScreen(props) {
                     _renderUserItem(user)
                 }
 
+
+                <Text style={{
+                    fontSize:20,
+                    fontWeight: "bold",
+                    padding: 10
+                }}>
+                    All Posts (
+                    {list.length}
+                    )
+                </Text>
+                {
+                    list.length > 0 &&
+
+                    list.map((data, index) => {
+                        return _renderListItem(data, index)
+                    })
+                }
 
                 {
                     isLoading &&
